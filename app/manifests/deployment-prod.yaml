@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-cnci-example-app
+  labels:
+    app: azure-cnci-example-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azure-cnci-example-app
+  template:
+    metadata:
+      labels:
+        app: azure-cnci-example-app
+    spec:
+      containers:
+      - name: azure-cnci-example-app
+        image: azurecnci.azurecr.io/azure-cnci-example-app-prod:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ENVIRONMENT_NAME
+          value: "production"

@@ -1,0 +1,5 @@
+node_modules/
+.DS_Store
+.vscode
+azure-cnci-functions/azure-functions-core-tools/*
+azure-cnci-functions/shared_code/config.py
