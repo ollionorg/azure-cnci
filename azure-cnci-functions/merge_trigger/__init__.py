@@ -12,6 +12,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     pipeline_id = None
     build_run_result_url = None
     pipeline_name = config.BUILD_DEPLOY_PROD_PIPELINE
+    
     project_name = config.AZURE_DEVOPS_PROJECT_NAME
     payload = json.loads(req.form.get("payload"))
     
