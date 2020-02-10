@@ -1,4 +1,4 @@
-azure-functions
-azure-devops
-slackclient
-requests
+azure-functions==1.0.7
+azure-devops==6.0.0b2
+slackclient==2.5.0
+requests==2.22.0
