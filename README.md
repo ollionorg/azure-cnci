@@ -4,16 +4,16 @@
 
 This repository contains code for the sample application and the azure functions which are extension over azure cloud for the demo of the Cloud Native CI/CD talk given by Vishal Parpia at the Google Cloud Summit Singapore ‘19.
 
-The /app folder contains the sample NodeJs application along with the CloudBuild yaml, Docker files and Kubernetes yaml. The application has some unit tests and integration tests defined which are checked during the build process.
+The [app](app) folder contains the sample NodeJs application along with the CloudBuild yaml, Docker files and Kubernetes yaml. The application has some unit tests and integration tests defined which are checked during the build process.
 
-The /azure-cnci-functions folder contains the code for the Azure Functions to listen to Azure Pipelines updates and Slack approval events.
+The [azure-cnci-functions](azure-cnci-functions) folder contains the code for the Azure Functions to listen to Azure Pipelines updates and Slack approval events.
 
 
 ## Process Flow
 
 The source for the application to be deployed is this GitHub repository. When a pull request is raised to the master branch it triggers Azure Pipeline to build and test code based on the PR. If it is successful then the user can merge the PR into the master branch. 
 
-Merging the PR triggers another CloudBuild to perform unit tests, build the Docker image, push the image to Azure Container Repository, deploy it to Kubernetes pods for the staging environment and then perform integration tests.
+Merging the PR triggers another build to perform unit tests, build the Docker image, push the image to Azure Container Repository, deploy it to Kubernetes pods for the staging environment and then perform integration tests.
 
 Notifications at each stage are sent to a Slack channel. 
 
@@ -27,7 +27,7 @@ The user can now decide if he wants to roll out the build to production, this ca
 
 ### Create AKS Clusters
 
-Create two clusters, one for staging environment and other for production. Not down cluster names and deployment zones
+Create two clusters, one for staging environment and other for production.
 
 ### Connecting Repository to Azure Pipelines
 
@@ -38,9 +38,9 @@ Create two clusters, one for staging environment and other for production. Not d
 * Click on create pipelines -> Click on GitHub -> Give access to the organization -> Then select a repo from the organization.
 * Click on AKS for build pipeline to be generated -> Select the resource group -> Then select the Azure Container Registry from where the docker image needs to be deployed. 
 * Create 3 pipelines 
-  * pr-validator /pr-validator.yml
-  * build-deploy-stage /build-deploy-stage.yml
-  * build-deploy-prod /build-deploy-prod.yml
+  * pr-validator [pr-validator.yml](pr-validator.yml)
+  * build-deploy-stage [build-deploy-stage.yml](build-deploy-stage.yml)
+  * build-deploy-prod [build-deploy-prod.yml](build-deploy-prod.yml)
 
 ### Generate Slack Bot User Token
 
@@ -48,7 +48,7 @@ You can get the bot user token using OAuth2 or from your slack app dashboard (if
 
 ### Specifying constants
 
-You can specify your configuration constants in azure-cnci-functions/shared_code/config.py replace following values in the config.py with your specific values.
+You can specify your configuration constants in [azure-cnci-functions/shared_code/config.py](azure-cnci-functions/shared_code/config.py) replace following values in the [config.py](azure-cnci-functions/shared_code/config.py) with your specific values.
 
   * **<<organization\>>**: Specify your Azure DevOps organization name.
   * **<<devops_project\>>**: Specify your Azure DevOps project.
@@ -66,7 +66,6 @@ You can specify your configuration constants in azure-cnci-functions/shared_code
 ### Deploy Cloudfunctions
 
 * Deploy Functions
-   * Slack Approval Events Listener
    
     ```
     az login
